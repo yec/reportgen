@@ -2,7 +2,7 @@ Reportgen
 =========
 
 We use this utility to quickly generate a html report framework
-given a contents and template
+given contents and template files.
 
 Usage
 -----
