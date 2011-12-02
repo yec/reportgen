@@ -1,0 +1,22 @@
+Home | index
+Our Approach | highlights
+  Highlights | highlights
+  Message from the<br />&nbsp;&nbsp;&nbsp;SH&E committee chairman | message-from-the-chairman
+  About foo | about-csr
+  About this report | about-this-report
+  Governance and<br />&nbsp;&nbsp;&nbsp;risk management | governance-and-risk-management
+Safety, health and environment | safety-health-and-environment-health-safety
+  Health and safety | safety-health-and-environment-health-safety
+  Environment | safety-health-and-environment-environment
+Our people | our-people
+Environment | environment-energy
+  Energy | environment-energy
+  Water | environment-water
+  Waste | environment-waste
+Community | community
+Building sustainable and energy efficient solutions | climate-change
+Glossary | glossary
+Limited assurance report | limited_assurance_report | pdf
+Energy efficiency opportunities | energy_efficiency_opportunities | pdf
+Downloads | downloads
+Contact us/<br />feedback form | contact-us
