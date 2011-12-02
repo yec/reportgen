@@ -23,4 +23,4 @@ by modifying sample_report/root/template.html
 pages.txt is where reportgen finds the pages to generate. It is in the
 form of a list and can handle 2 levels of menu.
 
-title | filename (no extension) [ | pdf ] (optional if link is pdf)
+title | filename (no extension) \[ | pdf \] (optional if link is pdf)
