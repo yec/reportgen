@@ -25,14 +25,32 @@ foreach ($pages as $count => $page) {
   $pagedata = explode('|',$page);
   $title = trim($pagedata[0]);
   $file = $output.trim($pagedata[1]).'.html';
-  if (file_exists($report.'root/template-'.trim($pagedata[1]))) {
-    copy($report.'root/template-'.trim($pagedata[1]), $file);
+  if (file_exists($report.'root/template-'.trim($pagedata[1]).'.html')) {
+    copy($report.'root/template-'.trim($pagedata[1]).'.html', $file);
   } else {
     copy($report.'root/template.html', $file);
   }
   $nav = generatenav($pages, trim($pagedata[1]));
   $prev = $count > 0 ? pageinfo($pages[$count-1]): array('','index');
   $next = $count < count($pages) -1?pageinfo($pages[$count+1]): array('','index');
+  $inc = 1;
+  while (true) {
+    if ($next[2] == true) {
+      $next = pageinfo($pages[$count+$inc]);
+      $inc++;
+    } else {
+      break;
+    }
+  }
+  $inc = 1;
+  while (true) {
+    if ($prev[2] == true) {
+      $prev = pageinfo($pages[$count-$inc]);
+      $inc++;
+    } else {
+      break;
+    }
+  }
   $current = pageinfo($pages[$count]);
   if ($prev[1] == $current[1] && $count != 0) {
     $prev = pageinfo($pages[$count-2]);
@@ -67,12 +85,8 @@ function pageinfo($record) {
   $pagedata = explode('|',$record);
   $title = trim($pagedata[0]);
   $base = trim($pagedata[1]);
-  if (substr($pagedata[0], 0, 1) == ' ') {
-    $sub = true;
-  } else {
-    $sub = false;
-  }
-  return array($title, $base, $sub);
+  $pdf = isset($pagedata[2])? true: false;
+  return array($title, $base, $pdf);
 }
 
 function generatenav($pages, $curfile) {
