@@ -9,7 +9,7 @@ Usage
 
 Within the reportgen folder run:
 
-    ./generate sample_report
+    ./generate.php sample_report
 
 This will output the sample report html files to sample_report/output
 
