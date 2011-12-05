@@ -35,7 +35,7 @@ foreach ($pages as $count => $page) {
   $next = $count < count($pages) -1?pageinfo($pages[$count+1]): array('','index');
   $inc = 1;
   while (true) {
-    if ($next[2] == true) {
+    if (@$next[2] == true) {
       $next = pageinfo($pages[$count+$inc]);
       $inc++;
     } else {
@@ -44,7 +44,7 @@ foreach ($pages as $count => $page) {
   }
   $inc = 1;
   while (true) {
-    if ($prev[2] == true) {
+    if (@$prev[2] == true) {
       $prev = pageinfo($pages[$count-$inc]);
       $inc++;
     } else {
@@ -59,9 +59,16 @@ foreach ($pages as $count => $page) {
   $newcontents = str_replace('{navigation}', implode(PHP_EOL, $nav), $filecontents);
   $newcontents = str_replace('{previous}', $prev[1].'.html', $newcontents);
   $newcontents = str_replace('{next}', $next[1].'.html', $newcontents);
-  $newcontents = str_replace('{page}', str_replace('&nbsp;',' ',strip_tags(trim($pagedata[0]))), $newcontents);
+  $newcontents = str_replace('{title}', str_replace('&nbsp;',' ',strip_tags(trim($pagedata[0]))), $newcontents);
   if (file_exists($report.'pages/'.$current[1].'.html')) {
-    $newcontents = str_replace('{content}', file_get_contents($report.'pages/'.$current[1].'.html'), $newcontents);
+    // if content is contained in the tags extract content
+    // otherwise the whole page is used
+    preg_match('/<!--CONTENTBEGIN-->\s+(.+?)\s+<!--CONTENTEND-->/s', file_get_contents($report.'pages/'.$current[1].'.html'), $matches);
+    if (count($matches) > 0) {
+        $newcontents = str_replace('{content}', PHP_EOL.'<!--CONTENTBEGIN-->'.PHP_EOL.$matches[1].PHP_EOL.'<!--CONTENTEND-->', $newcontents);
+    } else {
+        $newcontents = str_replace('{content}', PHP_EOL.'<!--CONTENTBEGIN-->'.PHP_EOL.file_get_contents($report.'pages/'.$current[1].'.html').PHP_EOL.'<!--CONTENTEND-->', $newcontents);
+    }
     echo '--- ';
   } else {
     if (trim(@$pagedata[2]) == 'pdf') {
